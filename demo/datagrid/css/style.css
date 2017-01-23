@@ -79,8 +79,13 @@ textarea {
     font-size: 14px;
 }
 a{decoration:none;cursor:point}
-.brand-logo{
-	padding-left:25px!important;
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    text-align: center;
 }
+nav .brand-logo {
+    position: relative!important;
+ }
 nav { background-color: #26A69A;}
 .new-wrapper a:hover{color:blue;}
