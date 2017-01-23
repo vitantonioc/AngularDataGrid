@@ -3,10 +3,10 @@
 Angular 1.6, Angular Material Design and Materialize
 
 Install:
-npm install
+<strong>npm install</strong>
 
 run:
-gulp default
+<strong>gulp default</strong>
 
 
 screenshots:
