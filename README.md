@@ -1,3 +1,3 @@
-# Getting Started With Gulp
+# Angular data grid 
 
-Gulp example app for the tutorial
+Angular 1.6, Angular Material Design and Materialize
