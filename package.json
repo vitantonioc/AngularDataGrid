@@ -1,0 +1,23 @@
+{
+  "name": "AngularDataGrid",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "gulp default",
+    "prebuild": "npm install"
+  },
+  "description": "Light, flexible and performant Data Grid for AngularJS apps, with built-in sorting, pagination and filtering options, unified API for client-side and server-side data fetching, \r seamless synchronization with browser address bar and total freedom in mark-up and styling suitable for your application. Angular 1.6 compliant. Materialize. Angular Design",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-util": "latest",
+    "gulp-sass": "latest",
+    "gulp-coffee": "latest",
+    "gulp-uglify": "latest",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest"
+  },
+  "author": "Vitantonio Castronuovo <vitantonio@gmail.com> (https://github.com/vitantonioc/AngularDataGrid)",
+  "license": "MIT",
+  "dependencies": {
+    "gulp-open": "^2.0.0"
+  }
+}

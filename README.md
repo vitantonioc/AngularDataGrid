@@ -1,2 +1,3 @@
-# AngularDataGrid
-Angular Data Grid sample using Material Design styling and Materialize
+# Getting Started With Gulp
+
+Gulp example app for the tutorial
