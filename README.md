@@ -7,6 +7,10 @@ npm install
 
 run:
 gulp default
+
+
+screenshots:
+
 ![alt tag](https://github.com/vitantonioc/AngularDataGrid/blob/master/1.jpg)
 ![alt tag](https://github.com/vitantonioc/AngularDataGrid/blob/master/2.jpg)
 
