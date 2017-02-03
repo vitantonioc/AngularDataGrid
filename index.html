@@ -1,11 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>redirect...</title>
-    <meta http-equiv="refresh" content="2;url=demo/datagrid/" />
+  <title>Angular Data Grid - Angular Design and Materialize</title>
+  <meta charset="utf-8">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc1/angular-material.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-blue.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link rel="stylesheet" href="public/datagrid/css/style.css">
 </head>
-<body>
-Redirect...
+<body >
+  <div class="page"> 
+    <main>
+      <section class="well ins1" ng-app="myApp" ng-controller="myAppController" ng-cloak>
+           <div class="col s12">     
+       <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo"> Angular Data Grid with Materialize</a>     
+    </div>
+  </nav>
+      </div>
+        <div class="container hr"  >                
+    <div layout="column" layout-fill class="container">
+   <div class="row">
+    <md-content layout-padding layout="row" layout-align="center">
+        <div flex-gt-md="60" flex-md="80" flex-xs="100" class=" col s12">
+            <div layout-gt-xs="row" layout-xs="column" layout-align="stretch center"  class=" col s12">
+                <div  layout="row" layout-align="center start"  class=" col s12" >
+                    <md-input-container md-no-float md-is-error="false" class="md-block flex-gt-xs flex-xs">
+                     <h3><i class="fa fa-search" aria-hidden="true"></i>  Search for text</h3>
+                        <input ng-model="title"
+                               class="md-input"
+                               ng-change="gridActions.filter()"
+                               id="order"
+                               placeholder=""
+                               filter-by="title"
+                               filter-type="text"
+                               aria-invalid="false">
+                    </md-input-container>                    
+                </div>  
+                <div id="searchDate" class=" col s12">   
+              <h3> <i class="fa fa-search" aria-hidden="true"></i> Search for date</h3>       
+                <div  layout="row" layout-align="start center" class=" col s6">                  
+                                   <input type="text"       
+                                   ng-model="dateFrom"
+                                   flex="100" 
+                                   md-min-date="minDate"                                   
+                                   md-max-date="maxDate" 
+                                   placeholder="From"
+                                   is-open="dateFromOpened"
+                                   ng-click="dateFromOpened = true"
+                                   filter-by="fecha"
+                                   filter-type="dateFrom"
+                                   ng-change="gridActions.filter()"  
+                                   class="datepicker" />                      
+                </div>
+                <div  layout="row" layout-align="start center" class=" col s6" >                 
+                                   <input type="text"                                        
+                                   ng-model="dateTo"
+                                   flex="100"
+                                   md-min-date="minDate" 
+                                   md-max-date="maxDate"   
+                                   placeholder="To"
+                                   is-open="dateToOpened"
+                                   ng-click="dateToOpened = true"
+                                   filter-by="fecha"
+                                   filter-type="dateTo"
+                                   ng-change="gridActions.filter()"          
+                                   class="datepicker" />
+                                 </div>
+                         </div>
+                                     </div>
+            <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
+        
+                    <div class="col s12">
+                         <div class="tipologias col s6">
+                           <h3> <i class="fa fa-hashtag" aria-hidden="true"></i> Types </h3>
+                                 <md-select filter-by="statusDisplay"
+                                           filter-type="select"
+                                           ng-model="status"
+                                           placeholder="Types"
+                                           ng-change="filter()">
+                                    <md-option value="">All types </md-option>
+                                    <md-option ng-repeat="option in statusOptions track by option.value "
+                                               value="{{option.value }}" ng-bind="option.value ">
+                                        
+                                    </md-option>
+                                    </md-select>
+                             </div>
+                 <div class="col s6">   <h4><button class="waves-effect waves-light btn" ng-click="loadData();status = ''" >
+                           <i class="material-icons">restore_page</i> Clear
+                          </button></h4> 
+                          </div>
+                    </div>
+
+                <div layout-gt-sm="row" layout-sm="column" layout-align="center" class="col s12">
+                    <div flex-gt-sm="25" flex-sm="100" layout="row" layout-align="start center">
+                        <span ng-bind="filtered.length"></span><span> entry</span>
+                    </div>
+                    <div flex-gt-sm="75" flex-xs="100" >
+                        <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center">
+                            <grid-pagination max-size="5"
+                                             boundary-links="true"
+                                             class="pagination mdl-shadow--2dp"
+                                             ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                                             total-items="paginationOptions.totalItems"
+                                             ng-model="paginationOptions.currentPage"
+                                             ng-change="reloadGrid()"
+                                             items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                            <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                                <md-select ng-init="paginationOptions.itemsPerPage = '10'" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()">
+                                    <md-option>10</md-option>
+                                    <md-option>25</md-option>
+                                    <md-option>50</md-option>
+                                    <md-option>75</md-option>
+                                </md-select>
+                                
+                            </md-input-container>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp "  >
+                        <thead>
+                        <tr>                        
+                            <th sortable="fecha" class="sortable st-sort-disable th-dropdown" style="width: 25px">
+                                <span>Fecha </span>                               
+                            </th>
+                            <th sortable="texto" class="sortable mdl-data-table__cell--non-numeric" >
+                                <span>Titular</span>
+                            </th>                          
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tableSearch" ng-repeat="item in filtered | startFrom:(paginationOptions.currentPage-1)*paginationOptions.itemsPerPage | limitTo:paginationOptions.itemsPerPage track by $index">                         
+                           <td ng-bind="item.fecha | date:'dd/MM/yyyy'" ></td>
+                            <td class="mdl-data-table__cell--non-numeric" >
+                                 <strong> 
+                                  <h3><a ng-href="{{item.link}}" target="_self" title="{{item.title}}">
+                                    <span ng-bind="item.title | limitTo:145" data-ellipsis data-ellipsis-append="read more" class="titleSpan"></span>
+                                  </a></h3> </strong>
+                                  <img materialboxed class="materialboxed responsive-img" width="150"  ng-src="{{item.linkImg}}" data-caption="{{item.dataCaption}}" />
+                                <textarea ng-bind="item.texto"></textarea>
+                                <p>(<span ng-bind="item.statusDisplay | limitTo:125"></span>) - 
+                                <a ng-href="{{item.link}}" target="_blank"><span ng-bind="item.link | limitTo:125"></span></a></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div layout-xs="column" layout="row" layout-align-xs="end end" layout-align="end center" class="col s12">
+                    <grid-pagination max-size="5"
+                                     boundary-links="true"
+                                     class="pagination"
+                                     ng-if="paginationOptions.totalItems  > paginationOptions.itemsPerPage"
+                                     total-items="paginationOptions.totalItems"
+                                     ng-model="paginationOptions.currentPage"
+                                     ng-change="reloadGrid()"
+                                     items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                    <md-input-container flex-offset-gt-xs="5" class="items-per-page">
+                        <md-select ng-init="paginationOptions.itemsPerPage = '10'" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()">
+                            <md-option>10</md-option>
+                            <md-option>25</md-option>
+                            <md-option>50</md-option>
+                            <md-option>75</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
+
+    </md-content>
+     </div>
+</div>
+</div>
+      </section>
+  </main>
+   
+  </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.4.1/velocity.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-aria.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-messages.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc1/angular-material.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+<script src="public/datagrid/js/codeJs.js"></script>
+<script src="public/datagrid/js/pagination.js"></script>
+<script src="public/datagrid/js/dataGrid.js"></script>
+<script src="public/datagrid/js/ngCtrl.js"></script>
 </body>
 </html>
