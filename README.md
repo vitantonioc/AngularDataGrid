@@ -2,13 +2,13 @@
 
 <h3>Angular 1.6, Angular Material Design and Materialize</h3>
 
-<h4>Install:</h4>
+Install:
 <strong>npm install</strong>
 
-<h4>run:</h4>
+run:
 <strong>gulp default</strong>
 
-<h4>Demo:</h4>
+Demo:
 
 https://vitantonioc.github.io/AngularDataGrid/
 
