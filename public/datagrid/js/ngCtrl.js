@@ -45,7 +45,8 @@ angular.module('myApp', ['dataGrid', 'pagination', 'ngMaterial','ngMaterial', 'n
             getData: function () {
                 return $http({
                     method: 'GET',
-                    url: 'data/data.json'
+                    //url: 'data/data.json'
+                    url: 'public/datagrid/data/data.json'
                 });
             }
         }
