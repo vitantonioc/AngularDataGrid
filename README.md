@@ -1,12 +1,20 @@
 # Angular data grid 
 
 <h3>Angular 1.6, Angular Material Design and Materialize</h3>
+- Angular 1.6
+- Bootstrap
+- Materialize
+- Font Awesome
+- Json data 
 
-Install:
-<strong>npm install</strong>
+<h3>Install:</h3>
+- npm install
 
-run:
-<strong>gulp default</strong>
+<h3>Run:</h3>
+- gulp default
+
+<h3>Browser</h3>
+- localhost:7000
 
 Demo:
 
