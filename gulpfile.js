@@ -1,69 +1,33 @@
-// Gulpfile
-var gulp = require('gulp'),
-    gutil = require('gulp-util'),
-    sass = require('gulp-sass'),
-    coffee = require('gulp-coffee'),
-    connect = require('gulp-connect'),
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat');
+'use strict';
 
-var coffeeSources = ['scripts/hello.coffee'],
-    jsSources = ['scripts/*.js'],
-    sassSources = ['styles/*.scss'],
-    htmlSources = ['**/*.html'],
-    outputDir = 'assets';
+var gulp = require('gulp');
+var browserSync = require('browser-sync');
+var nodemon = require('gulp-nodemon');
 
 
-gulp.task('log', function() {
-  gutil.log('== My First Task ==')
+gulp.task('default', ['browser-sync'], function () {
 });
 
-gulp.task('copy', function() {
-  gulp.src('index.html')
-  .pipe(gulp.dest(outputDir))
+gulp.task('browser-sync', ['nodemon'], function() {
+  browserSync.init(null, {
+    proxy: "http://localhost:5000",
+        files: ["public/**/*.*"],
+        browser: "google chrome",
+        port: 7000,
+  });
 });
-
-gulp.task('sass', function() {
-  gulp.src(sassSources)
-  .pipe(sass({style: 'expanded'}))
-    .on('error', gutil.log)
-  .pipe(gulp.dest('assets'))
-  .pipe(connect.reload())
+gulp.task('nodemon', function (cb) {
+  
+  var started = false;
+  
+  return nodemon({
+    script: 'app.js'
+  }).on('start', function () {
+    // to avoid nodemon being started multiple times
+    // thanks @matthisk
+    if (!started) {
+      cb();
+      started = true; 
+    } 
+  });
 });
-
-gulp.task('coffee', function() {
-  gulp.src(coffeeSources)
-  .pipe(coffee({bare: true})
-    .on('error', gutil.log))
-  .pipe(gulp.dest('scripts'))
-});
-
-gulp.task('js', function() {
-  gulp.src(jsSources)
-  .pipe(uglify())
-  .pipe(concat('script.js'))
-  .pipe(gulp.dest(outputDir))
-  .pipe(connect.reload())
-});
-
-gulp.task('watch', function() {
-  gulp.watch(coffeeSources, ['coffee']);
-  gulp.watch(jsSources, ['js']);
-  gulp.watch(sassSources, ['sass']);
-  gulp.watch(htmlSources, ['html']);
-});
-
-gulp.task('connect', function() {
-  connect.server({
-  	port: 9999,
-    root: '.',
-    livereload: true
-  })
-});
-
-gulp.task('html', function() {
-  gulp.src(htmlSources)
-  .pipe(connect.reload())
-});
-
-gulp.task('default', ['html', 'coffee', 'js', 'sass', 'connect', 'watch']);
