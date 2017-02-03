@@ -34,6 +34,7 @@ angular.module('myApp', ['dataGrid', 'pagination', 'ngMaterial','ngMaterial', 'n
            })
         };
 
+        
          $scope.loadData();
 
     }])
